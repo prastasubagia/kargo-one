@@ -1,4 +1,5 @@
 # kargo-one
+
 Kargo Hackathon Repository
 
 Get depedency
@@ -13,7 +14,6 @@ mix ecto.migrate
 Run seeder
 mix run priv/repo/seeds.exs
 
-
 First run (get depedency, create database, migrate model, run seeder)
 mix setup
 
@@ -22,3 +22,9 @@ mix ecto.setup
 
 Reinitialize database, model and seeds
 mix ecto.reset
+
+# FE kargo
+
+- cd kargo_fe
+- npm install
+- npm run start
