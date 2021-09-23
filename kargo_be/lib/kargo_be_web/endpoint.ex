@@ -40,6 +40,7 @@ defmodule KargoBeWeb.Endpoint do
   plug Plug.RequestId
   plug Plug.Telemetry, event_prefix: [:phoenix, :endpoint]
 
+  plug CORSPlug
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
@@ -49,5 +50,4 @@ defmodule KargoBeWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug KargoBeWeb.Router
-  plug CORSPlug
 end
