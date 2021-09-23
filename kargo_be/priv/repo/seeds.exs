@@ -11,8 +11,11 @@
 # and so on) as they will fail if something goes wrong.
 
 alias KargoBe.Repo
-
+alias KargoBe.Unit.TruckType
+alias KargoBe.Unit.Truck
 alias KargoBe.Drivers.Driver
+
+# Drivers
 Repo.insert!(%Driver{
   name: "John Doe",
   phone_number: "081010001000",
@@ -34,14 +37,29 @@ Repo.insert!(%Driver{
   created_at: NaiveDateTime.local_now()
 })
 
-alias KargoBe.Unit.Truck
+# Truck Types
+Repo.insert!(%TruckType{
+  name: "FUSO"
+});
+Repo.insert!(%TruckType{
+  name: "PICKUP"
+});
+Repo.insert!(%TruckType{
+  name: "TRONTON"
+});
+Repo.insert!(%TruckType{
+  name: "VAN"
+});
+
+# Trucks
 Repo.insert!(%Truck{
   license_number: "AB2275TF",
   license_type: "yellow",
   production_year: 2007,
   status: true,
   stnk_path: "",
-  kir_path: ""
+  kir_path: "",
+  truck_type: 2
 })
 Repo.insert!(%Truck{
   license_number: "AB706JA",
@@ -49,7 +67,8 @@ Repo.insert!(%Truck{
   production_year: 2010,
   status: true,
   stnk_path: "",
-  kir_path: ""
+  kir_path: "",
+  truck_type: 3
 })
 Repo.insert!(%Truck{
   license_number: "AB1454JA",
@@ -57,7 +76,8 @@ Repo.insert!(%Truck{
   production_year: 2005,
   status: true,
   stnk_path: "",
-  kir_path: ""
+  kir_path: "",
+  truck_type: 4
 })
 Repo.insert!(%Truck{
   license_number: "AB1680OS",
@@ -65,5 +85,6 @@ Repo.insert!(%Truck{
   production_year: 2001,
   status: false,
   stnk_path: "",
-  kir_path: ""
+  kir_path: "",
+  truck_type: 1
 })
