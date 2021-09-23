@@ -1,4 +1,5 @@
 # kargo-one
+
 Kargo Hackathon Repository
 
 Get depedency
@@ -24,3 +25,9 @@ mix ecto.setup
 
 Reinitialize database, model and seeds
 mix ecto.reset
+
+# FE kargo
+
+- cd kargo_fe
+- npm install
+- npm run start
