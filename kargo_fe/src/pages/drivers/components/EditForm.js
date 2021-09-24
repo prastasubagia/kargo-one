@@ -22,7 +22,7 @@ const EditForm = ({ driver }) => {
       const response = await editDriver(id, updatedDriver);
       // console.log(response);
       if (response.status === 200) {
-        console.log(response);
+        // console.log(response);
         history.push("/driver");
         // return <Redirect to="/driver" />;
       }
