@@ -1,10 +1,11 @@
-import { useContext, useState, useEffect } from "react";
-// import {EmployeeContext} from '../contexts/EmployeeContext';
-import { Modal, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { FaCircle, FaEdit, FaTrash } from "react-icons/fa";
 // import EditForm from './EditForm'
 
 const Driver = ({ driver }) => {
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+
   return (
     <>
       <td>{driver.id}</td>
@@ -26,7 +27,7 @@ const Driver = ({ driver }) => {
       <td>
         <OverlayTrigger overlay={<Tooltip id={`tooltip-top`}>Edit</Tooltip>}>
           <button
-            // onClick={handleShow}
+            onClick={handleShow}
             className="btn text-warning btn-act"
             data-toggle="modal"
           >
@@ -46,10 +47,10 @@ const Driver = ({ driver }) => {
 
       {/* <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Employee</Modal.Title>
+          <Modal.Title>Edit Driver</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <EditForm theEmployee={driver} />
+          <EditForm driver={driver} />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
