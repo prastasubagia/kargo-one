@@ -2,22 +2,28 @@ import {
   useTable,
   useFilters,
   useGlobalFilter,
-  useAsyncDebounce,
   useSortBy,
   usePagination,
 } from "react-table";
 
-import { Button, Dropdown, Form, Table } from "react-bootstrap";
-import { FaSortDown, FaSortUp, FaSort } from "react-icons/fa";
+import { Button, Form, Table } from "react-bootstrap";
 import { TableFilter } from "./TableFilter";
 import {
+  FaSortDown,
+  FaSortUp,
+  FaSort,
   FaPlus,
   FaChevronLeft,
   FaChevronRight,
-  FaCircle,
 } from "react-icons/fa";
+import React from "react";
 
-export function TableContainer({ columns, data, title }) {
+export function TableContainer({
+  columns,
+  data,
+  title,
+  rowProps = () => ({}),
+}) {
   const {
     getTableProps,
     getTableBodyProps,
@@ -54,7 +60,7 @@ export function TableContainer({ columns, data, title }) {
     <>
       {/* FILTER */}
       <div className="d-flex flex-row justify-content-between mb-3">
-        <Button variant="success">
+        <Button variant="success" href={`/${title}/add`}>
           <FaPlus className="mr-2" />
           Add {title}
         </Button>
@@ -78,17 +84,21 @@ export function TableContainer({ columns, data, title }) {
                   <div className="d-flex justify-content-between">
                     {column.render("Header")}
                     {/* Add a sort direction indicator */}
-                    <span>
-                      {column.isSorted ? (
-                        column.isSortedDesc ? (
-                          <FaSortDown />
+                    {column.disableSortBy ? (
+                      ""
+                    ) : (
+                      <span>
+                        {column.isSorted ? (
+                          column.isSortedDesc ? (
+                            <FaSortDown />
+                          ) : (
+                            <FaSortUp />
+                          )
                         ) : (
-                          <FaSortUp />
-                        )
-                      ) : (
-                        <FaSort />
-                      )}
-                    </span>
+                          <FaSort />
+                        )}
+                      </span>
+                    )}
                   </div>
                 </th>
               ))}
@@ -100,7 +110,7 @@ export function TableContainer({ columns, data, title }) {
           {page.map((row, i) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <tr {...row.getRowProps(rowProps(row))}>
                 {row.cells.map((cell) => {
                   // console.log(cell);
                   return (

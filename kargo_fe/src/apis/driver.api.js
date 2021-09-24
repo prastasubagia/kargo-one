@@ -12,15 +12,27 @@ export const getDriver = async (id) => {
 };
 
 export const createDriver = async (data) => {
-  const response = await axios.post(`${LOCAL_CONSTANTS.BASE_URL}drivers`, data);
+  const payload = {
+    driver: data,
+  };
+  console.log(payload);
+  const response = await axios.post(
+    `${LOCAL_CONSTANTS.BASE_URL}drivers`,
+    payload
+  );
   console.log(response);
   return response;
 };
 
-export const editDriver = async ({ id, data }) => {
-  const response = await axios.patch(
+export const editDriver = async (id, data) => {
+  console.log(data);
+  const payload = {
+    driver: data,
+  };
+  console.log(payload);
+  const response = await axios.put(
     `${LOCAL_CONSTANTS.BASE_URL}drivers/${id}`,
-    data
+    payload
   );
   console.log(response);
   return response;
