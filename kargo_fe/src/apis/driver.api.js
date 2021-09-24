@@ -15,12 +15,12 @@ export const createDriver = async (data) => {
   const payload = {
     driver: data,
   };
-  console.log(payload);
+  // console.log(payload);
   const response = await axios.post(
     `${LOCAL_CONSTANTS.BASE_URL}drivers`,
     payload
   );
-  console.log(response);
+  // console.log(response);
   return response;
 };
 

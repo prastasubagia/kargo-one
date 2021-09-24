@@ -4,12 +4,14 @@ import { useContext, useState } from "react";
 import { createDriver } from "../../../apis/driver.api";
 import { Header } from "../../../components/Header";
 import { Footer } from "../../../components/Footer";
+import { Redirect, useHistory } from "react-router";
 
 const AddForm = () => {
+  const history = useHistory();
   const [driver, setDriver] = useState({
     name: "",
     phone_number: "",
-    status: "",
+    status: true,
   });
 
   const onInputChange = (e) => {
@@ -20,7 +22,15 @@ const AddForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createDriver({ name, phone_number, status });
+    (async () => {
+      const response = await createDriver({ name, phone_number, status });
+      console.log(response);
+      if (response.status == 201) {
+        console.log(response);
+        history.push("/driver");
+        // return <Redirect to="/driver" />;
+      }
+    })();
   };
 
   return (
@@ -56,8 +66,8 @@ const AddForm = () => {
                 value={status}
                 onChange={(e) => onInputChange(e)}
               >
-                <option>True</option>
-                <option>False</option>
+                <option value="true">True</option>
+                <option value="false">False</option>
               </Form.Control>
             </Form.Group>
             <Button variant="success" type="submit" block>
