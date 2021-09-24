@@ -2,10 +2,12 @@ import { Form, Button, Container } from "react-bootstrap";
 
 import { useState } from "react";
 import { editDriver } from "../../../apis/driver.api";
+import { useHistory } from "react-router";
 // import { Header } from "../../../components/Header";
 // import { Footer } from "../../../components/Footer";
 
 const EditForm = ({ driver }) => {
+  const history = useHistory();
   const id = driver.id;
   const [name, setName] = useState(driver.name);
   const [phone_number, setPhone] = useState(driver.phone_number);
@@ -15,8 +17,16 @@ const EditForm = ({ driver }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(updatedDriver);
-    editDriver(id, updatedDriver);
+    // console.log(updatedDriver);
+    (async () => {
+      const response = await editDriver(id, updatedDriver);
+      // console.log(response);
+      if (response.status === 200) {
+        // console.log(response);
+        history.push("/driver");
+        // return <Redirect to="/driver" />;
+      }
+    })();
   };
 
   return (
@@ -52,8 +62,8 @@ const EditForm = ({ driver }) => {
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
               >
-                <option>True</option>
-                <option>False</option>
+                <option value="true">True</option>
+                <option value="false">False</option>
               </Form.Control>
             </Form.Group>
             <Button variant="success" type="submit" block>
